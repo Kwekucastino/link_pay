@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenk
+    ports:
+      - "8000:8080"
+    volumes:
+      - jenkins_data:/var/jenkins_home
+    networks:
+      - man
+
+  tomcat-uat:
+    image: tomcat:9.0-jdk17-temurin-jammy
+    container_name: tomcat_uat
+    ports:
+      - "8001:8080"
+    networks:
+      - man
+
+  tomcat-prod:
+    image: tomcat:9.0-jdk-temurin-jammy
+    container_name: tomcat_prod
+    ports:
+      - "8002:8080"
+    networks:
+      - man
+
+networks:
+  man:
+
+volumes:
+  jenkins_data:
